@@ -1,15 +1,9 @@
 # main backend entry point
 
 import os
-<<<<<<< HEAD
-from flask import Flask, jsonify, request
-from models import *
-
-app = Flask(__name__)
-=======
 import datetime
 
-from flask import Flask, jsonify, request, session, send_file
+from flask import Flask, jsonify, request, session
 from flask_session import Session
 from models import *
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -28,17 +22,10 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 # Set up database
->>>>>>> 2eccd22ff5dc42e92b0df1b65d0ef00f387bdf80
 app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db.init_app(app)
 
-<<<<<<< HEAD
-@app.route("/")
-def index():
-    return "Hello, world!"
-
-=======
 
 # page routes config
 
@@ -132,14 +119,13 @@ def stats_api():
     # check for signin
 
     if session['user_id'] is None:
-        return jsonify({success: False, message="Not logged in!"})
+        return jsonify({success: False, message: "Not logged in!"})
 
     # default timeframe
     t_from = datetime.datetime(0,0,0)
     t_to = datetime.datetime.now()
     
     request.args.get('from')
->>>>>>> 2eccd22ff5dc42e92b0df1b65d0ef00f387bdf80
 
 
 if __name__ == "__main__":
