@@ -5,6 +5,15 @@ html {
     font-family: 'Poppins', sans-serif;
 }
 
+.logo1 img{
+    margin: 5vh;
+    height: 180px;
+    margin-bottom:0px;
+}
+footer img{
+    height: 100px;
+    margin-left: 40vw;
+}
 p {
     font-size: 12px;
 }
@@ -19,7 +28,7 @@ p {
 .header {
     font-size: 72px;
     font-weight: 600;
-    margin-top: 25vh;
+    margin-top: 10px;
 }
 
 /* main content */
