@@ -33,7 +33,7 @@ class Entry(db.Model):
     time = db.Column(db.DateTime, nullable=False)
 
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
-    tag_id = db.Column(db.Integer, db.ForeignKey("tab.id"))
+    tag_id = db.Column(db.Integer, db.ForeignKey("tag.id"))
 
     def __init__(self, text, uid, tid):
         self.text = text
