@@ -56,7 +56,9 @@
 
         <!-- ADD ACTIVITY -->
         <div v-if="display=='activity'" class="addActivity">
-
+            Tag:<select class="dropDown" v-model="selectedMonth">
+                <option v-for="tag in tags" :value="tag">{{tag}}</option>
+            </select>
         </div>
 
     </div>
@@ -80,8 +82,8 @@
         </div>
     </template>
 </body>
-<script src="index.js">
+<script src="/static/index.js">
 </script>
-<link rel="stylesheet" href="styles/style.css">
+<link rel="stylesheet" href="/static/styles/style.css">
 
 </html>
