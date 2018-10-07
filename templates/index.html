@@ -24,11 +24,12 @@
             <a v-on:click="display='activity'"><i class="fas fa-plus fa-2x"></i></a>
             <a v-on:click="display='profile'"><i class="far fa-user fa-2x"></i></a>
             <a v-on:click="display='chart'"><i class="fas fa-chart-pie fa-2x"></i></a>
+            <a href="/logout"><i class="fas fa-sign-out-alt fa-2x"></i></a>
         </div>
 
         <!-- PROFILE VIEW -->
         <div v-if="display=='profile'" class="profile">
-            <h3 class="overview-text">Overview</h3>
+            <h3 class="overview-text">Overview</h3>{{formvalue}}
             <div class="dateSelection">
                 Year
                 <select class="dropDown" v-model="selectedYear">
@@ -56,9 +57,11 @@
 
         <!-- ADD ACTIVITY -->
         <div v-if="display=='activity'" class="addActivity">
-            Tag:<select class="dropDown" v-model="selectedMonth">
+            <input v-model='selectedActivity' class='activity-box' placeholder='Add Activity detail'>
+            Tag:<select class="dropDown" v-model="selectedTag">
                 <option v-for="tag in tags" :value="tag">{{tag}}</option>
-            </select>
+            </select><br>
+            <button class="button" v-on:click="activityAdd">Add</button>
         </div>
 
     </div>

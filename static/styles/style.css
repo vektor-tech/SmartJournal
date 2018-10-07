@@ -50,8 +50,11 @@ html {
     padding-left: 5px;
     margin-right: 50px;
     margin-left: 3px;
-    border: solid 1px black;
     color: black;
+    position: relative;
+    left: 20px;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
 }
 
 .footer {
@@ -70,7 +73,7 @@ html {
 
 .search-box {
     padding: 5px;
-    margin: 10px 0;
+    margin: 30px;
     border: 1px solid black;
     border-radius: 5px;
 }
@@ -147,8 +150,32 @@ html {
 
 /* FOR ACTIVITY */
 .addActivity {
-    height: 300px;
-    margin-top: 200px;
-    font-size: 20px;
-    border: dashed 1px steelblue;
+    position: relative;
+    margin-left: 100px;
+    margin-right: 100px;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    border: solid 1px black;
+    padding: 10px;
+    margin-top: 50px;
+}
+
+.addActivity input {
+    margin-right: 50px;
+}
+
+.activity-box {
+    position: relative;
+    left: 20px;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.button {
+    position: relative;
+    margin-left: 400px;
+    width: 50px;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
 }
