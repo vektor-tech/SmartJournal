@@ -11,7 +11,7 @@ class User(db.Model):
     __tablename__ = "user"
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(25), nullable=False)
-    password = db.Column(db.String(50), nullable=False)
+    password = db.Column(db.Text, nullable=False)
 
     # user 1:N entry relationship
     entries = db.relationship("Entry", backref="user", lazy=True)
