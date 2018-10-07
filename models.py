@@ -14,7 +14,7 @@ class User(db.Model):
     password = db.Column(db.Text, nullable=False)
 
     # user 1:N entry relationship
-    entries = db.relationship("Entry", backref="user", lazy=True)
+    entries = db.relationship("Entry", backref="user", lazy='dynamic')
 
     def __init__(self, username, password):
         self.username = username

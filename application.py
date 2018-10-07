@@ -1,14 +1,14 @@
 # main backend entry point
 
 import os
-import datetime
+from datetime import datetime, timezone
 
 from flask import Flask, jsonify, request, session, send_file, redirect
 from flask_session import Session
 from models import *
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from helpers import login_required
+from helpers import login_required, get_dict_array, get_dict
 
 # Check for environment variable
 if not os.getenv("DATABASE_URL"):
@@ -118,26 +118,103 @@ def register():
 
 # api routes config
 
-@app.route("/api/stats")
-def stats_api():
+@app.route("/api/entry", methods=["GET", "POST"])
+def entry_api():
+
+    # check for signin
+
+    # if session.get('user_id') is None:
+    #     return jsonify({"success": False, "message": "Not logged in!"})
+
+    if request.method == "POST":
+        # add entry to db
+        data = request.get_json()
+
+        # default timeframe
+        t_from = datetime.utcnow()
+        t_to = datetime.utcnow()
+        
+        # edit for last hour
+        t_from.replace(hour=t_from.hour-1)
+
+        # edit if params given
+        if 'from' in data:
+            t_from = data['from']
+        if 'to' in data:
+            t_to = data['to']
+
+        # convert params to datetime
+        try: 
+            t_from = datetime.fromtimestamp(int(t_from), timezone.utc)
+            t_to = datetime.fromtimestamp(int(t_to), timezone.utc)
+        except:
+            print("error on time conversion or out of bound")
+            return jsonify({"success": False, "message": "Intervals invalid!"})
+
+        # round to nearest hour
+        t_from.replace(microsecond=0, second=0, minute=0)
+        t_to.replace(microsecond=0, second=0, minute=0)
+
+        # add the entries
+        # TODO
+        print(t_from, t_to) 
+
+        return jsonify({"success": True})
+
+    else:
+        # default timeframe
+        t_from = 0
+        t_to = datetime.utcnow().timestamp()
+
+        # save params if given
+        if request.args.get('from'):
+            t_from = request.args.get('from')
+        if request.args.get('to'):
+            t_to = request.args.get('to')
+
+        # convert interval to datetime
+        try: 
+            t_from = datetime.fromtimestamp(int(t_from), timezone.utc)
+            t_to = datetime.fromtimestamp(int(t_to), timezone.utc)
+        except:
+            print("error on time conversion or out of bound")
+            return jsonify({"success": False, "message": "Intervals invalid!"})
+        
+        # get current user
+        user = User.query.get(session['user_id'])
+
+        # filter with time
+        entries = user.entries.filter(Entry.time >= t_from, Entry.time <= t_to).all()
+
+        return jsonify({"success": True, "entries": get_dict_array(user.entries)})
+
+
+@app.route("/api/tag", methods=["GET", "POST"])
+def tag_api():
 
     # check for signin
 
     if session.get('user_id') is None:
         return jsonify({"success": False, "message": "Not logged in!"})
 
-    # default timeframe
-    t_from = datetime.datetime(1,1,1)
-    t_to = datetime.datetime.now()
+    # process request
+
+    if request.method == "POST":
+        # add tag to db
+        data = request.get_json()
+
+        tag = Tag(data['name'])
+        db.session.add(tag)
+        db.session.commit()
+
+        return jsonify({"success": True, "tag": get_dict(tag)})
+
+    else:
+        # get tags
+        tags = Tag.query.all()
+
+        return jsonify({"success": True, "tags": get_dict_array(tags)})
     
-    # save params if given
-    if request.args.get('from'):
-        t_from = request.args.get('from')
-    if request.args.get('to'):
-        t_to = request.args.get('to')
-
-    return jsonify({"success": True})
-
 
 if __name__ == "__main__":
     with app.app_context():
