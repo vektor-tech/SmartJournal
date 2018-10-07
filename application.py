@@ -73,7 +73,7 @@ def logout():
     # clear session var
     session.clear()
 
-    return redirect("/")
+    return redirect("/login")
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -123,14 +123,20 @@ def stats_api():
 
     # check for signin
 
-    if session['user_id'] is None:
-        return jsonify({success: False, message: "Not logged in!"})
+    if session.get('user_id') is None:
+        return jsonify({"success": False, "message": "Not logged in!"})
 
     # default timeframe
-    t_from = datetime.datetime(0,0,0)
+    t_from = datetime.datetime(1,1,1)
     t_to = datetime.datetime.now()
     
-    request.args.get('from')
+    # save params if given
+    if request.args.get('from'):
+        t_from = request.args.get('from')
+    if request.args.get('to'):
+        t_to = request.args.get('to')
+
+    return jsonify({"success": True})
 
 
 if __name__ == "__main__":
