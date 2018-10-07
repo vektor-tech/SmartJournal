@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,600');
+
+/* global rules */
+html {
+    font-family: 'Poppins', sans-serif;
+}
+
+p {
+    font-size: 12px;
+}
+
+/* wrapper rules */
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.header {
+    font-size: 72px;
+    margin-top: 25vh;
+}
+
+/* main content */
+.name-group {
+    padding: 10px;
+    margin-top: 35px;
+}
+
+.name-group p {
+    opacity: 0.5;
+    padding: 5px;
+}
+
+.name-group input {
+    border: 1px solid gray;
+    padding: 5px;
+}
+
+.pw-group {
+    padding: 10px;
+}
+
+.pw-group p {
+    opacity: 0.5;
+    padding: 5px;
+}
+
+.pw-group input {
+    border: 1px solid gray;
+    padding: 5px;
+}
+
+/* .pw-group {
+    padding: 10px;
+}
+
+.pw-group p {
+    opacity: 0.5;
+    padding: 5px;
+}
+
+.pw-group input {
+    border: 1px solid gray;
+    padding: 5px;
+} */
+
+
+/* component rules */
+.button {
+    margin-top: 15px;
+    padding: 10px;
+    border: 1px solid #00aaff;
+    color: #00aaff;
+    justify-content: center;
+    border-radius: 5%;
+}
