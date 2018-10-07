@@ -220,6 +220,32 @@ def entry_api():
         return jsonify({"success": True, "entries": result})
 
 
+@app.route("/api/entry/<int:id>", methods=["DELETE"])
+def entry_single_api(id):
+
+    if request.method == "DELETE":
+        # delete the entry by id
+        data = request.get_json()
+
+        # check if id exists
+        if not data:
+            return jsonify({"success": False, "message":"No body included!"})
+        if 'id' not in data:
+            return jsonify({"success": False, "message":"Id not found in body!"})
+
+        # check if user has permission
+        entry = Entry.query.get(data['id'])
+
+        if entry.user_id != session.get('user_id'):
+            return jsonify({"success": False, "message":"Not Authorized!"})
+
+        # actually remove from db
+        db.session.delete(entry)
+        db.session.commit()
+
+        return jsonify({"success": True})
+
+
 @app.route("/api/tag", methods=["GET", "POST"])
 def tag_api():
 
