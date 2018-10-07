@@ -79,6 +79,7 @@ new Vue({
         display: "profile",
         showModal: false,
         isEditing: true,
+        selectedActivity: "",
         selectedTag: "",
         selectedYear: "",
         selectedMonth: "",
@@ -139,5 +140,12 @@ new Vue({
                 }
             ]
         }
+    },
+    methods: {
+        activityAdd() {
+
+            this.display = "profile";
+        }
+
     }
 });
