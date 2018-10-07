@@ -1,7 +1,7 @@
 # main backend entry point
 
 import os
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 
 from flask import Flask, jsonify, request, session, send_file, redirect
 from flask_session import Session
@@ -166,17 +166,14 @@ def entry_api():
         t_to.replace(microsecond=0, second=0, minute=0)
 
         # add the entries
-        end = t_to.hour
-        start = t_from.hour
-
-        while start < end:
+        while t_from < t_to:
+            # add to db
             entry = Entry(data['text'], t_from, session.get('user_id'), data['tag_id'], data['p_level'])
             db.session.add(entry)
             db.session.commit()
 
-            # change t_from
-            start += 1
-            t_from.replace(hour=start)
+            # increase time
+            t_from = t_from + timedelta(seconds=3600)
 
         return jsonify({"success": True})
 
