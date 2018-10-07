@@ -264,6 +264,16 @@ new Vue({
           }
         })
         .catch(err => console.error(err));
+    },
+
+    deleteEntry: function (deleteId) {
+      fetch(`/api/entry/${deleteId}`, {
+          method: "delete",
+        })
+        .then(res => res.json())
+        .then(data => {
+          console.log(data);
+        })
     }
   }
 });

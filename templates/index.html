@@ -86,10 +86,11 @@
                 <div v-for='(dateWithArticles, date) in searchedArticles'>
                     <div v-for='article in dateWithArticles' class='article'>
                         <div class='dot'>
-                            <div class="hour">{{article.hour}} hr</div>
+                            <div class="hour">{{article.hour}} am</div>
                         </div>
                         <p class='article-date'>{{ article.text }}</p>
                         <h3><a>{{ article.tag_name }}</a></h3>
+                        <a v-on:click="deleteEntry(article.id)" class="delete"><i class="far fa-trash-alt fa-2x"></i></a>
                     </div>
                 </div>
             </div>
