@@ -46,10 +46,8 @@ def login():
     if request.method == 'POST':
         # Ensure form was filled
         if not request.form.get('username'):
-            flash("Must provide Username!")
             return redirect("/login")
         elif not request.form.get('password'):
-            flash("Password not provided!")
             return redirect("/login")
 
         # query db for user
@@ -88,6 +86,13 @@ def register():
     if request.method == 'POST':
 
         # ensure params are passed
+        if not request.form.get('username'):
+            return redirect("/register")
+        elif not request.form.get('password') or not request.form.get('confirmation'):
+            # Ensure password was submitted
+            return redirect("/register")
+        elif request.form.get('password') != request.form.get('confirmation'):
+            return redirect("/register")
 
         # query db for user
         user = User.query.filter_by(username=request.form.get('username')).first()
@@ -97,7 +102,7 @@ def register():
             return redirect("/register")
 
         # make new user in db
-        new = User(username, generate_password_hash(password))
+        new = User(request.form.get('username'), generate_password_hash(request.form.get('password')))
         db.session.add(new)
         db.session.commit()
 
@@ -108,7 +113,7 @@ def register():
     
     else:
         # send register page
-        return "REGISTER PAGE"
+        return send_file("templates/register.html")
 
 
 # api routes config
@@ -130,5 +135,6 @@ def stats_api():
 
 if __name__ == "__main__":
     with app.app_context():
+        # db.drop_all()
         db.create_all()
     app.run(debug=True, use_reloader=True)

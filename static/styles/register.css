@@ -51,21 +51,6 @@ p {
     padding: 5px;
 }
 
-/* .pw-group {
-    padding: 10px;
-}
-
-.pw-group p {
-    opacity: 0.5;
-    padding: 5px;
-}
-
-.pw-group input {
-    border: 1px solid gray;
-    padding: 5px;
-} */
-
-
 /* component rules */
 .button {
     margin-top: 15px;
@@ -74,4 +59,5 @@ p {
     color: #00aaff;
     justify-content: center;
     border-radius: 5%;
+    background-color: transparent;
 }
