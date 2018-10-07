@@ -141,13 +141,30 @@ new Vue({
     allTags: [],
     level: ["1", "2", "3", "4", "5"],
 
-    chartData: [["Jan", 4], ["Feb", 2], ["Mar", 10], ["Apr", 5], ["May", 3]],
+    // chartData: [["Jan", 4], ["Feb", 2], ["Mar", 10], ["Apr", 5], ["May", 3]],
+    chartData: [],
 
-    datesArticles: []
+    datesArticles: {
+      data: []
+    }
+    // datesArticles: {
+    //   title: [
+    //     {
+    //       id: 20,
+    //       p_level: 3,
+    //       tag_id: 0,
+    //       tag_name: "test",
+    //       text: "Completed AI course 2",
+    //       time: "Sun, 07 Oct 2018 08:00:00 GMT",
+    //       user_id: 3
+    //     }
+    //   ]
+    // }
   },
   mounted() {
     this.getTag();
     this.getEntry();
+    this.createChartData();
   },
   methods: {
     activityAdd() {
@@ -162,6 +179,13 @@ new Vue({
       this.selectedFrom = val.setHours(this.from, 0, 0) / 1000;
       console.log(this.selectedFrom);
       console.log(this.selectedTo);
+    },
+
+    createChartData() {
+      this.datesArticles.data.forEach(element => {
+        this.chartData.push(element);
+      });
+      console.log(chartData);
     },
 
     /////////////////   roshan editted
@@ -198,16 +222,16 @@ new Vue({
             (this.selectedLevel = "");
         })
         .catch(err => console.error(err));
-    }
+    },
 
-    getEntry: function () {
-        fetch(`/api/entry`)
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-                if (data.success) this.datesArticles = data.entries;
-            })
-            .catch(err => console.error(err));
+    getEntry: function() {
+      fetch(`/api/entry`)
+        .then(res => res.json())
+        .then(data => {
+          console.log(data);
+          if (data.success) this.datesArticles.data = data.entries;
+        })
+        .catch(err => console.error(err));
     }
   }
 });
