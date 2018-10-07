@@ -1,15 +1,9 @@
 # main backend entry point
 
 import os
-<<<<<<< HEAD
-from flask import Flask, jsonify, request
-from models import *
-
-app = Flask(__name__)
-=======
 import datetime
 
-from flask import Flask, jsonify, request, session, send_file
+from flask import Flask, jsonify, request, session, send_file, redirect
 from flask_session import Session
 from models import *
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -28,17 +22,10 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 # Set up database
->>>>>>> 2eccd22ff5dc42e92b0df1b65d0ef00f387bdf80
 app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db.init_app(app)
 
-<<<<<<< HEAD
-@app.route("/")
-def index():
-    return "Hello, world!"
-
-=======
 
 # page routes config
 
@@ -46,7 +33,7 @@ def index():
 @login_required
 def index():
     # main app
-    return "Hello, world!"
+    return send_file("templates/index.html")
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -60,26 +47,26 @@ def login():
         # Ensure form was filled
         if not request.form.get('username'):
             flash("Must provide Username!")
-            return "HAHA"
+            return redirect("/login")
         elif not request.form.get('password'):
             flash("Password not provided!")
-            return "HAHA"
+            return redirect("/login")
 
         # query db for user
         user = User.query.filter_by(username=request.form.get('username')).first()
 
         # check username exists & password match
         if user is None or not check_password_hash(user.password, request.form.get('password')):
-            return "INVALID PASSWORD"
+            return redirect("/login")
 
         # remember id
         session['user_id'] = user.id
 
-        return "LOGGED IN"
+        return redirect("/")
 
     else:
         # get request
-        return "LOGIN PAGE"
+        return send_file("templates/login.html")
 
 @app.route("/logout")
 def logout():
@@ -88,7 +75,7 @@ def logout():
     # clear session var
     session.clear()
 
-    return "LOGGED OUT"
+    return redirect("/")
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -107,7 +94,7 @@ def register():
 
         # user with username already exists
         if user:
-            return "PICK DIFFERENT USERNAME"
+            return redirect("/register")
 
         # make new user in db
         new = User(username, generate_password_hash(password))
@@ -117,7 +104,7 @@ def register():
         # save user login
         session['user_id'] = new.id
 
-        return "REGISTERED"
+        return redirect("/")
     
     else:
         # send register page
@@ -132,14 +119,13 @@ def stats_api():
     # check for signin
 
     if session['user_id'] is None:
-        return jsonify({success: False, message="Not logged in!"})
+        return jsonify({success: False, message: "Not logged in!"})
 
     # default timeframe
     t_from = datetime.datetime(0,0,0)
     t_to = datetime.datetime.now()
     
     request.args.get('from')
->>>>>>> 2eccd22ff5dc42e92b0df1b65d0ef00f387bdf80
 
 
 if __name__ == "__main__":
