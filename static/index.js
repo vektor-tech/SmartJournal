@@ -53,7 +53,7 @@ Vue.component("blog-articles", {
         .then(data => {
           console.log(data);
         })
-      console.log("deleteentry clicked");
+      this.getEntry();
     }
   }
 });

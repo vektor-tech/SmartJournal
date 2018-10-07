@@ -90,7 +90,7 @@
                         </div>
                         <p class='article-date'>{{ article.text }}</p>
                         <h3><a>{{ article.tag_name }}</a></h3>
-                        <a v-on:click="deleteEntry(1)" class="delete"><i class="far fa-trash-alt fa-2x"></i></a>
+                        <a v-on:click="deleteEntry(article.id)" class="delete"><i class="far fa-trash-alt fa-2x"></i></a>
                     </div>
                 </div>
             </div>
