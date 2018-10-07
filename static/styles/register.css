@@ -18,6 +18,7 @@ p {
 
 .header {
     font-size: 72px;
+    font-weight: 600;
     margin-top: 25vh;
 }
 
@@ -35,6 +36,7 @@ p {
 .name-group input {
     border: 1px solid gray;
     padding: 5px;
+    border-radius: 5%;
 }
 
 .pw-group {
@@ -49,10 +51,21 @@ p {
 .pw-group input {
     border: 1px solid gray;
     padding: 5px;
+    border-radius: 5%;
 }
 
 /* component rules */
 .button {
+    margin-top: 15px;
+    padding: 10px;
+    border: 1px solid #00aaff;
+    color: #ffffff;
+    justify-content: center;
+    border-radius: 5%;
+    background-color: #00aaff;
+}
+
+.button2 {
     margin-top: 15px;
     padding: 10px;
     border: 1px solid #00aaff;
