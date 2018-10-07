@@ -1,25 +1,3 @@
-@import url('https://fonts.googleapis.com/css?family=Poppins:400,600');
-
-/* global rules */
-html {
-    font-family: 'Poppins', sans-serif;
-}
-.logo1 img{
-    margin: 5vh;
-    height: 180px;
-    margin-bottom:0px;
-}
-p {
-    font-size: 12px;
-}
-
-/* wrapper rules */
-.container {
-    max-width: 1000px;
-    margin: 0 auto;
-    text-align: center;
-}
-
 .header {
     font-size: 72px;
     font-weight: 600;

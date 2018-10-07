@@ -1,21 +1,16 @@
-<!DOCTYPE html>
-<html>
+{% extends "layout.html" %}
 
-<head>
-    <title>Login</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="../static/styles/reset.css">
-    <link rel="stylesheet" href="../static/styles/register.css">
-</head>
+{% block styles %}
+    <link rel="stylesheet" href="/static/styles/register.css">
+{% endblock %}
 
-<body>
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
     <form method="post" action="/register">
         <div class="container">
-                <div class="logo1">
-                        <img src="../data/SJ_logo.png" alt="smart_journal_logo">
-                    </div>
             <div class="header">
                 <h1><b>Register</b></h1>
             </div>
@@ -35,6 +30,4 @@
             <input class="button" type="submit" value="Register">
         </div>
     </form>
-</body>
-
-</html>
+{% endblock %}

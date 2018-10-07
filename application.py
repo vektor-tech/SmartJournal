@@ -3,7 +3,7 @@
 import os
 from datetime import datetime, timezone, timedelta
 
-from flask import Flask, jsonify, request, session, send_file, redirect
+from flask import Flask, jsonify, request, session, send_file, redirect, render_template, flash
 from flask_session import Session
 from models import *
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -46,16 +46,19 @@ def login():
     if request.method == 'POST':
         # Ensure form was filled
         if not request.form.get('username'):
-            return redirect("/login")
+            flash("No username found!")
+            return render_template("login.html")
         elif not request.form.get('password'):
-            return redirect("/login")
+            flash("No password found!")
+            return render_template("login.html")
 
         # query db for user
         user = User.query.filter_by(username=request.form.get('username')).first()
 
         # check username exists & password match
         if user is None or not check_password_hash(user.password, request.form.get('password')):
-            return redirect("/login")
+            flash("Invalid username/password!")
+            return render_template("login.html")
 
         # remember id
         session['user_id'] = user.id
@@ -64,7 +67,7 @@ def login():
 
     else:
         # get request
-        return send_file("templates/login.html")
+        return render_template("login.html")
 
 @app.route("/logout")
 def logout():
@@ -87,19 +90,23 @@ def register():
 
         # ensure params are passed
         if not request.form.get('username'):
-            return redirect("/register")
+            flash("No username found!")
+            return render_template("register.html")
         elif not request.form.get('password') or not request.form.get('confirmation'):
             # Ensure password was submitted
-            return redirect("/register")
+            flash("No password/confirmation found!")
+            return render_template("register.html")
         elif request.form.get('password') != request.form.get('confirmation'):
-            return redirect("/register")
+            flash("Passwords don't match!")
+            return render_template("register.html")
 
         # query db for user
         user = User.query.filter_by(username=request.form.get('username')).first()
 
         # user with username already exists
         if user:
-            return redirect("/register")
+            flash("Username already exists!")
+            return render_template("register.html")
 
         # make new user in db
         new = User(request.form.get('username'), generate_password_hash(request.form.get('password')))
@@ -113,7 +120,7 @@ def register():
     
     else:
         # send register page
-        return send_file("templates/register.html")
+        return render_template("register.html")
 
 
 # api routes config
