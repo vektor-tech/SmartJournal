@@ -207,7 +207,7 @@ def entry_api():
         user = User.query.get(session['user_id'])
 
         # filter with time
-        entries = user.entries.filter(Entry.time >= t_from, Entry.time <= t_to).all()
+        entries = user.entries.filter(Entry.time >= t_from, Entry.time <= t_to).order_by(Entry.time).all()
 
         # result builder
         result = []
