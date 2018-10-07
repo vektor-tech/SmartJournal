@@ -215,7 +215,7 @@ def entry_api():
             ent = get_dict(e)
             ent['tag_name'] = e.tag.name
             ent['hour'] = e.time.hour
-            res.append(ent)
+            result.append(ent)
 
         return jsonify({"success": True, "entries": result})
 
