@@ -4,7 +4,7 @@ Vue.component("modal", {
 
 Vue.component("blog-articles", {
   template: "#my-template",
-  props: ["datesArticles"],
+  props: ["datesArticles", "allTags"],
   data() {
     return {
       searchQuery: ""
@@ -138,57 +138,16 @@ new Vue({
       "23"
     ],
 
-    tags: [],
+    allTags: [],
     level: ["1", "2", "3", "4", "5"],
 
     chartData: [["Jan", 4], ["Feb", 2], ["Mar", 10], ["Apr", 5], ["May", 3]],
 
-    datesArticles: {
-      "8am": [
-        {
-          tag: "Learning",
-          text: "Learned advanced AI",
-          hour: "8 am"
-        },
-        {
-          tag: "Sleep",
-          text: "",
-          hour: "9 am"
-        }
-      ],
-      "April, 2016": [
-        {
-          tag: "Misc",
-          text: "Went to gym",
-          hour: "10 am"
-        },
-        {
-          tag: "Homework",
-          text: "Did CSE 72sfdf30 assignment",
-          hour: "11 am"
-        }
-      ],
-      "December, 2015": [
-        {
-          tag: "Cooewfking",
-          text: "Made lunch",
-          hour: "12 pm"
-        },
-        {
-          tag: "Sleep",
-          text: "",
-          hour: "1 pm"
-        },
-        {
-          tag: "Sleep",
-          text: "sdfsdf",
-          hour: "2 pm"
-        }
-      ]
-    }
+    datesArticles: []
   },
   mounted() {
     this.getTag();
+    this.getEntry();
   },
   methods: {
     activityAdd() {
@@ -211,7 +170,7 @@ new Vue({
         .then(res => res.json())
         .then(data => {
           console.log(data);
-          if (data.success) this.tags = data.tags;
+          if (data.success) this.allTags = data.tags;
         })
         .catch(err => console.error(err));
     },
@@ -239,6 +198,16 @@ new Vue({
             (this.selectedLevel = "");
         })
         .catch(err => console.error(err));
+    }
+
+    getEntry: function () {
+        fetch(`/api/entry`)
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.success) this.datesArticles = data.entries;
+            })
+            .catch(err => console.error(err));
     }
   }
 });
