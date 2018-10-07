@@ -176,7 +176,7 @@ def entry_api():
 
             # change t_from
             start += 1
-            t_from.hour = start
+            t_from.replace(hour=start)
 
         return jsonify({"success": True})
 
