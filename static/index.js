@@ -4,7 +4,7 @@ Vue.component("modal", {
 
 Vue.component("blog-articles", {
   template: "#my-template",
-  props: ["datesArticles", "allTags"],
+  props: ["datesArticles", "allTags", ""],
   data() {
     return {
       searchQuery: ""
@@ -43,6 +43,17 @@ Vue.component("blog-articles", {
         count += this.searchedArticles[date].length;
       }
       return count;
+    },
+
+    deleteEntry: function (deleteId) {
+      fetch(`/api/entry/${deleteId}`, {
+          method: "delete",
+        })
+        .then(res => res.json())
+        .then(data => {
+          console.log(data);
+        })
+      this.getEntry();
     }
   }
 });
@@ -217,7 +228,7 @@ new Vue({
     },
 
     /////////////////   roshan editted
-    getTag: function() {
+    getTag: function () {
       fetch(`/api/tag`)
         .then(res => res.json())
         .then(data => {
@@ -227,32 +238,32 @@ new Vue({
         .catch(err => console.error(err));
     },
 
-    addNewEntry: function() {
+    addNewEntry: function () {
       fetch("/api/entry", {
-        method: "post",
-        body: JSON.stringify({
-          to: this.selectedTo,
-          from: this.selectedFrom,
-          text: this.selectedActivity,
-          tag_id: this.selectedTag.id,
-          p_level: this.selectedLevel
-        }),
-        headers: {
-          "Content-Type": "application/json"
-        }
-      })
+          method: "post",
+          body: JSON.stringify({
+            to: this.selectedTo,
+            from: this.selectedFrom,
+            text: this.selectedActivity,
+            tag_id: this.selectedTag.id,
+            p_level: this.selectedLevel
+          }),
+          headers: {
+            "Content-Type": "application/json"
+          }
+        })
         .then(res => res.json())
         .then(data => {
           (this.to = ""),
-            (this.from = ""),
-            (this.selectedActivity = ""),
-            (this.selectedTag = ""),
-            (this.selectedLevel = "");
+          (this.from = ""),
+          (this.selectedActivity = ""),
+          (this.selectedTag = ""),
+          (this.selectedLevel = "");
         })
         .catch(err => console.error(err));
     },
 
-    getEntry: function() {
+    getEntry: function () {
       fetch(`/api/entry`)
         .then(res => res.json())
         .then(data => {
@@ -264,16 +275,6 @@ new Vue({
           }
         })
         .catch(err => console.error(err));
-    },
-
-    deleteEntry: function (deleteId) {
-      fetch(`/api/entry/${deleteId}`, {
-          method: "delete",
-        })
-        .then(res => res.json())
-        .then(data => {
-          console.log(data);
-        })
     }
   }
 });

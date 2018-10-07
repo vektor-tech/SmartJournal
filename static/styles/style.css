@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css?family=Poppins');
+@import url("https://fonts.googleapis.com/css?family=Poppins");
 
 html {
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
     padding: 30px;
 }
 
@@ -98,7 +98,7 @@ html {
 }
 
 &:before {
-    content: '';
+    content: "";
     position: absolute;
     top: 50%;
     left: -16px;
@@ -144,6 +144,11 @@ html {
     margin-left: 90%;
 }
 
+.delete i:hover {
+    transform: scale(1.1);
+    color: rgb(95, 95, 95);
+}
+
 /* FOR PIECHART */
 
 .chart {
@@ -169,6 +174,8 @@ html {
 
 .addActivity input {
     margin-right: 50px;
+    border: 1px solid black;
+    padding: 5px;
 }
 
 .activity-box {

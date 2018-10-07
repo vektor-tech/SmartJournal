@@ -2,7 +2,7 @@
 
 <head>
     <title>
-        HackUTA18
+        Smart Journal - Make Smart Decision
     </title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
@@ -86,7 +86,7 @@
                 <div v-for='(dateWithArticles, date) in searchedArticles'>
                     <div v-for='article in dateWithArticles' class='article'>
                         <div class='dot'>
-                            <div class="hour">{{article.hour}} am</div>
+                            <div class="hour">{{article.hour}} hr</div>
                         </div>
                         <p class='article-date'>{{ article.text }}</p>
                         <h3><a>{{ article.tag_name }}</a></h3>
