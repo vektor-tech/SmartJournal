@@ -1,188 +1,190 @@
-@import url('https://fonts.googleapis.com/css?family=Poppins');
+@import url("https://fonts.googleapis.com/css?family=Poppins");
 
 html {
-    font-family: 'Poppins', sans-serif;
-    padding: 30px;
+  font-family: "Poppins", sans-serif;
+  padding: 30px;
 }
 
 #app {
-    margin-left: 350px;
-    margin-right: 350px;
+  margin-left: 350px;
+  margin-right: 350px;
 }
 
 .title {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .title i {
-    padding: 10px;
-    color: black;
+  padding: 10px;
+  color: black;
 }
 
 .title i:hover {
-    transform: scale(1.1);
-    color: rgb(95, 95, 95);
+  transform: scale(1.1);
+  color: rgb(95, 95, 95);
 }
 
 .header-text {
-    flex: 0.9;
-    text-align: center;
+  flex: 0.9;
+  text-align: center;
 }
 
 .overview-text {
-    flex: 1;
-    margin-top: 50px;
-    margin-left: 50px;
+  flex: 1;
+  margin-top: 50px;
+  margin-left: 50px;
 }
 
 .dateSelection {
-    width: 700px;
-    height: 30px;
-    margin-left: 50px;
-    margin-top: 10px;
-    /* border: solid 1px black; */
+  width: 700px;
+  height: 30px;
+  margin-left: 50px;
+  margin-top: 10px;
+  /* border: solid 1px black; */
 }
 
 .dropDown {
-    width: 100px;
-    padding-left: 5px;
-    margin-right: 50px;
-    margin-left: 3px;
-    color: black;
-    position: relative;
-    left: 20px;
-    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
+  width: 100px;
+  padding-left: 5px;
+  margin-right: 50px;
+  margin-left: 3px;
+  color: black;
+  position: relative;
+  left: 20px;
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
 }
 
 .footer {
-    position: absolute;
-    width: 100%;
-    margin-left: 20%;
+  position: absolute;
+  width: 100%;
+  margin-left: 20%;
 }
 
 /* FOR TIMELINE */
 .containerr {
-    margin-left: 27px;
-    width: 90%;
+  margin-left: 27px;
+  width: 90%;
 }
 
 .search-box {
-    padding: 5px;
-    margin: 30px;
-    border: 1px solid black;
-    border-radius: 5px;
+  padding: 5px;
+  margin: 30px;
+  border: 1px solid black;
+  border-radius: 5px;
 }
 
 .timeline {
-    position: relative;
-    margin-left: 50px;
-    border-left: 1px solid black;
+  position: relative;
+  margin-left: 50px;
+  border-left: 1px solid black;
 }
 
 .hour {
-    margin-left: -50px;
-    margin-top: -5px;
+  margin-left: -50px;
+  margin-top: -5px;
 }
 
 .date {
-    display: inline-block;
-    border: 1px solid black;
-    border-radius: 5px;
-    padding: 5px;
-    position: relative;
-    left: 15px;
-    margin: 15px 0;
+  display: inline-block;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 5px;
+  position: relative;
+  left: 15px;
+  margin: 15px 0;
 }
 
 &:before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: -16px;
-    border: 1px solid black;
-    width: 14px;
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -16px;
+  border: 1px solid black;
+  width: 14px;
 }
 
 .article {
-    position: relative;
-    left: 20px;
-    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
-    padding: 10px;
-    margin: 10px 0;
+  position: relative;
+  left: 20px;
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
 }
 
 &:hover {
-    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.4);
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.4);
 }
 
 .article a {
-    color: steelblue;
-    text-decoration: none;
+  color: steelblue;
+  text-decoration: none;
 }
 
 .article-date {
-    font-weight: 300;
-    font-size: 14px;
+  font-weight: 300;
+  font-size: 14px;
 }
 
 .dot {
-    display: block;
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: steelblue;
-    left: -25.5px;
-    top: calc(50% - 5px);
+  display: block;
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: steelblue;
+  left: -25.5px;
+  top: calc(50% - 5px);
 }
 
 .delete {
-    margin-left: 90%;
+  margin-left: 90%;
 }
 
 /* FOR PIECHART */
 
 .chart {
-    margin-top: 100px;
-    text-align: center;
+  margin-top: 100px;
+  text-align: center;
 }
 
 .chart h2 {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 /* FOR ACTIVITY */
 .addActivity {
-    position: relative;
-    margin-left: 100px;
-    margin-right: 100px;
-    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
-    border: solid 1px black;
-    padding: 10px;
-    margin-top: 50px;
+  position: relative;
+  margin-left: 100px;
+  margin-right: 100px;
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  border: solid 1px black;
+  padding: 10px;
+  margin-top: 50px;
 }
 
 .addActivity input {
-    margin-right: 50px;
+  margin-right: 50px;
+  border: 1px solid black;
+  padding: 5px;
 }
 
 .activity-box {
-    position: relative;
-    left: 20px;
-    border-radius: 5px;
-    padding: 10px;
-    margin: 10px 0;
+  position: relative;
+  left: 20px;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
 }
 
 .button {
-    position: relative;
-    margin-left: 400px;
-    width: 50px;
-    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
+  position: relative;
+  margin-left: 400px;
+  width: 50px;
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
 }
