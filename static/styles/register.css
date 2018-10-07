@@ -74,3 +74,15 @@ p {
     border-radius: 5%;
     background-color: transparent;
 }
+
+/* responsive mobile */
+@media only screen and (max-width: 600px) {
+    .name-group input {
+        width: 60%;
+        padding: 15px;
+    }
+    .pw-group input {
+        width: 60%;
+        padding: 15px;
+    }
+}
