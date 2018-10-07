@@ -142,8 +142,13 @@ new Vue({
     level: ["1", "2", "3", "4", "5"],
 
     chartData: [
-      ['Travel', 2],
-      ['Study', 4]
+      ["Travel", 0],
+      ["Study", 0],
+      ["Work", 0],
+      ["Sleep", 0],
+      ["Social Media", 0],
+      ["Misc.", 0],
+      ["Entertainment", 0]
     ],
 
     datesArticles: {
@@ -153,7 +158,6 @@ new Vue({
   mounted() {
     this.getTag();
     this.getEntry();
-    this.createChartData();
   },
   methods: {
     activityAdd() {
@@ -173,17 +177,14 @@ new Vue({
 
     createChartData() {
       this.datesArticles.data.forEach(element => {
-        console.log(element);
-        this.chartData.push(element.tag_name);
+        this.chartData.forEach(e => {
+          if (element.tag_name == e[0]) e[1]++;
+        });
       });
-
-      console.log("chartdata now");
-      console.log(this.chartData);
-      console.log("end chardata");
     },
 
     /////////////////   roshan editted
-    getTag: function () {
+    getTag: function() {
       fetch(`/api/tag`)
         .then(res => res.json())
         .then(data => {
@@ -193,37 +194,40 @@ new Vue({
         .catch(err => console.error(err));
     },
 
-    addNewEntry: function () {
+    addNewEntry: function() {
       fetch("/api/entry", {
-          method: "post",
-          body: JSON.stringify({
-            to: this.selectedTo,
-            from: this.selectedFrom,
-            text: this.selectedActivity,
-            tag_id: this.selectedTag.id,
-            p_level: this.selectedLevel
-          }),
-          headers: {
-            "Content-Type": "application/json"
-          }
-        })
+        method: "post",
+        body: JSON.stringify({
+          to: this.selectedTo,
+          from: this.selectedFrom,
+          text: this.selectedActivity,
+          tag_id: this.selectedTag.id,
+          p_level: this.selectedLevel
+        }),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
         .then(res => res.json())
         .then(data => {
           (this.to = ""),
-          (this.from = ""),
-          (this.selectedActivity = ""),
-          (this.selectedTag = ""),
-          (this.selectedLevel = "");
+            (this.from = ""),
+            (this.selectedActivity = ""),
+            (this.selectedTag = ""),
+            (this.selectedLevel = "");
         })
         .catch(err => console.error(err));
     },
 
-    getEntry: function () {
+    getEntry: function() {
       fetch(`/api/entry`)
         .then(res => res.json())
         .then(data => {
           console.log(data);
-          if (data.success) this.datesArticles.data = data.entries;
+          if (data.success) {
+            this.datesArticles.data = data.entries;
+            this.createChartData();
+          }
         })
         .catch(err => console.error(err));
     }

@@ -23,7 +23,7 @@
             <h1 class="header-text">Smart Journal</h1>
             <a v-on:click="display='activity'"><i class="fas fa-plus fa-2x"></i></a>
             <a v-on:click="display='profile'"><i class="far fa-user fa-2x"></i></a>
-            <a v-on:click="display='chart'"><i class="fas fa-chart-pie fa-2x"></i></a>
+            <a v-on:click="display='chart';createChartData"><i class="fas fa-chart-pie fa-2x"></i></a>
             <a href="/logout"><i class="fas fa-sign-out-alt fa-2x"></i></a>
         </div>
 
@@ -97,6 +97,13 @@
     </template>
 </body>
 <script src="/static/index.js">
+
+
+
+
+
+
+
 </script>
 <link rel="stylesheet" href="/static/styles/style.css">
 
