@@ -54,6 +54,8 @@
         <div v-if="display=='chart'" class="chart">
             <h2>Today's Activity</h2>
             <pie-chart :data="chartData"></pie-chart>
+            <div id="plevel"></div>
+            <h2>Today's Productivity Level</h2>
             <line-chart :data="lineData"></line-chart>
         </div>
 

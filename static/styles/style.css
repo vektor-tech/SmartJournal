@@ -160,6 +160,10 @@ html {
     margin-bottom: 20px;
 }
 
+#plevel {
+    height: 100px;
+}
+
 /* FOR ACTIVITY */
 .addActivity {
     position: relative;
