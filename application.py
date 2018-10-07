@@ -3,7 +3,7 @@
 import os
 import datetime
 
-from flask import Flask, jsonify, request, session
+from flask import Flask, jsonify, request, session, send_file, redirect
 from flask_session import Session
 from models import *
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -33,7 +33,7 @@ db.init_app(app)
 @login_required
 def index():
     # main app
-    return "Hello, world!"
+    return send_file("templates/index.html")
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -47,26 +47,26 @@ def login():
         # Ensure form was filled
         if not request.form.get('username'):
             flash("Must provide Username!")
-            return "HAHA"
+            return redirect("/login")
         elif not request.form.get('password'):
             flash("Password not provided!")
-            return "HAHA"
+            return redirect("/login")
 
         # query db for user
         user = User.query.filter_by(username=request.form.get('username')).first()
 
         # check username exists & password match
         if user is None or not check_password_hash(user.password, request.form.get('password')):
-            return "INVALID PASSWORD"
+            return redirect("/login")
 
         # remember id
         session['user_id'] = user.id
 
-        return "LOGGED IN"
+        return redirect("/")
 
     else:
         # get request
-        return "LOGIN PAGE"
+        return send_file("templates/login.html")
 
 @app.route("/logout")
 def logout():
@@ -75,7 +75,7 @@ def logout():
     # clear session var
     session.clear()
 
-    return "LOGGED OUT"
+    return redirect("/")
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -94,7 +94,7 @@ def register():
 
         # user with username already exists
         if user:
-            return "PICK DIFFERENT USERNAME"
+            return redirect("/register")
 
         # make new user in db
         new = User(username, generate_password_hash(password))
@@ -104,7 +104,7 @@ def register():
         # save user login
         session['user_id'] = new.id
 
-        return "REGISTERED"
+        return redirect("/")
     
     else:
         # send register page
