@@ -31,14 +31,17 @@ class Entry(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.Text)
     time = db.Column(db.DateTime, nullable=False)
+    p_level = db.Column(db.Integer, nullable=False)
 
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     tag_id = db.Column(db.Integer, db.ForeignKey("tag.id"))
 
-    def __init__(self, text, uid, tid):
+    def __init__(self, text, time, uid, tid, plevel):
         self.text = text
+        self.time = time.replace(microsecond=0, second=0, minute=0)
         self.user_id = uid
         self.tag_id = tid
+        self.p_level = plevel
 
 
 class Tag(db.Model):

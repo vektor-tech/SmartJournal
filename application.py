@@ -123,30 +123,40 @@ def entry_api():
 
     # check for signin
 
-    # if session.get('user_id') is None:
-    #     return jsonify({"success": False, "message": "Not logged in!"})
+    if session.get('user_id') is None:
+        return jsonify({"success": False, "message": "Not logged in!"})
 
     if request.method == "POST":
         # add entry to db
         data = request.get_json()
 
+        # check required params
+        if not data:
+            return jsonify({"success": False, "message": "No body!"})
+        if 'text' not in data:
+            return jsonify({"success": False, "message": "No text!"})
+        if 'tag_id' not in data:
+            return jsonify({"success": False, "message": "No tag id!"})
+        if 'p_level' not in data:
+            return jsonify({"success": False, "message": "No productivity level!"})
+
         # default timeframe
-        t_from = datetime.utcnow()
-        t_to = datetime.utcnow()
+        t_from = datetime.utcnow().timestamp()
+        t_to = datetime.utcnow().timestamp()
         
         # edit for last hour
-        t_from.replace(hour=t_from.hour-1)
+        t_from = t_from - 3600
 
         # edit if params given
-        if 'from' in data:
+        if data and 'from' in data:
             t_from = data['from']
-        if 'to' in data:
+        if data and 'to' in data:
             t_to = data['to']
 
         # convert params to datetime
         try: 
-            t_from = datetime.fromtimestamp(int(t_from), timezone.utc)
-            t_to = datetime.fromtimestamp(int(t_to), timezone.utc)
+            t_from = datetime.fromtimestamp(int(t_from))
+            t_to = datetime.fromtimestamp(int(t_to))
         except:
             print("error on time conversion or out of bound")
             return jsonify({"success": False, "message": "Intervals invalid!"})
@@ -156,14 +166,23 @@ def entry_api():
         t_to.replace(microsecond=0, second=0, minute=0)
 
         # add the entries
-        # TODO
-        print(t_from, t_to) 
+        end = t_to.hour
+        start = t_from.hour
+
+        while start < end:
+            entry = Entry(data['text'], t_from, session.get('user_id'), data['tag_id'], data['p_level'])
+            db.session.add(entry)
+            db.session.commit()
+
+            # change t_from
+            start += 1
+            t_from.hour = start
 
         return jsonify({"success": True})
 
     else:
         # default timeframe
-        t_from = 0
+        t_from = datetime(1970,1,2).timestamp()
         t_to = datetime.utcnow().timestamp()
 
         # save params if given
@@ -174,8 +193,8 @@ def entry_api():
 
         # convert interval to datetime
         try: 
-            t_from = datetime.fromtimestamp(int(t_from), timezone.utc)
-            t_to = datetime.fromtimestamp(int(t_to), timezone.utc)
+            t_from = datetime.fromtimestamp(int(t_from))
+            t_to = datetime.fromtimestamp(int(t_to))
         except:
             print("error on time conversion or out of bound")
             return jsonify({"success": False, "message": "Intervals invalid!"})
