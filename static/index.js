@@ -22,9 +22,9 @@ Vue.component("blog-articles", {
       for (var date in this.datesArticles) {
         searchedObj[date] = this.datesArticles[date].filter(article => {
           return (
-            searchRegex.test(article.tag) ||
+            searchRegex.test(article.tag_name) ||
             searchRegex.test(article.text) ||
-            searchRegex.test(article.time)
+            searchRegex.test(article.hour)
           );
         });
       }
@@ -141,25 +141,14 @@ new Vue({
     allTags: [],
     level: ["1", "2", "3", "4", "5"],
 
-    // chartData: [["Jan", 4], ["Feb", 2], ["Mar", 10], ["Apr", 5], ["May", 3]],
-    chartData: [],
+    chartData: [
+      ['Travel', 2],
+      ['Study', 4]
+    ],
 
     datesArticles: {
       data: []
     }
-    // datesArticles: {
-    //   title: [
-    //     {
-    //       id: 20,
-    //       p_level: 3,
-    //       tag_id: 0,
-    //       tag_name: "test",
-    //       text: "Completed AI course 2",
-    //       time: "Sun, 07 Oct 2018 08:00:00 GMT",
-    //       user_id: 3
-    //     }
-    //   ]
-    // }
   },
   mounted() {
     this.getTag();
@@ -171,6 +160,7 @@ new Vue({
       this.display = "profile";
       this.convertToUTC();
       this.addNewEntry();
+      this.getEntry();
     },
 
     convertToUTC() {
@@ -183,13 +173,17 @@ new Vue({
 
     createChartData() {
       this.datesArticles.data.forEach(element => {
-        this.chartData.push(element);
+        console.log(element);
+        this.chartData.push(element.tag_name);
       });
-      console.log(chartData);
+
+      console.log("chartdata now");
+      console.log(this.chartData);
+      console.log("end chardata");
     },
 
     /////////////////   roshan editted
-    getTag: function() {
+    getTag: function () {
       fetch(`/api/tag`)
         .then(res => res.json())
         .then(data => {
@@ -199,32 +193,32 @@ new Vue({
         .catch(err => console.error(err));
     },
 
-    addNewEntry: function() {
+    addNewEntry: function () {
       fetch("/api/entry", {
-        method: "post",
-        body: JSON.stringify({
-          to: this.selectedTo,
-          from: this.selectedFrom,
-          text: this.selectedActivity,
-          tag_id: this.selectedTag.id,
-          p_level: this.selectedLevel
-        }),
-        headers: {
-          "Content-Type": "application/json"
-        }
-      })
+          method: "post",
+          body: JSON.stringify({
+            to: this.selectedTo,
+            from: this.selectedFrom,
+            text: this.selectedActivity,
+            tag_id: this.selectedTag.id,
+            p_level: this.selectedLevel
+          }),
+          headers: {
+            "Content-Type": "application/json"
+          }
+        })
         .then(res => res.json())
         .then(data => {
           (this.to = ""),
-            (this.from = ""),
-            (this.selectedActivity = ""),
-            (this.selectedTag = ""),
-            (this.selectedLevel = "");
+          (this.from = ""),
+          (this.selectedActivity = ""),
+          (this.selectedTag = ""),
+          (this.selectedLevel = "");
         })
         .catch(err => console.error(err));
     },
 
-    getEntry: function() {
+    getEntry: function () {
       fetch(`/api/entry`)
         .then(res => res.json())
         .then(data => {

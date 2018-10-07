@@ -144,6 +144,11 @@ html {
 
 .chart {
     margin-top: 100px;
+    text-align: center;
+}
+
+.chart h2 {
+    margin-bottom: 20px;
 }
 
 /* FOR ACTIVITY */

@@ -52,6 +52,7 @@
 
         <!-- CHART VIEW -->
         <div v-if="display=='chart'" class="chart">
+            <h2>Today's Activity</h2>
             <pie-chart :data="chartData"></pie-chart>
         </div>
 
@@ -82,10 +83,9 @@
             <input v-model='searchQuery' class='search-box' placeholder='Search..'>
             <div class='timeline' v-if='anyArticle()'>
                 <div v-for='(dateWithArticles, date) in searchedArticles'>
-                    <!-- <p v-if='dateWithArticles.length > 0' class='date'>{{ date }}</p> -->
                     <div v-for='article in dateWithArticles' class='article'>
                         <div class='dot'>
-                            <div class="hour">{{article.time}}</div>
+                            <div class="hour">{{article.hour}} hr</div>
                         </div>
                         <p class='article-date'>{{ article.text }}</p>
                         <h3><a>{{ article.tag_name }}</a></h3>
