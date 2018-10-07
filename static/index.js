@@ -85,7 +85,7 @@ new Vue({
         selectedMonth: "",
         selectedDay: "",
         years: [
-            '2017', '2018', '2019'
+            '2017', '2018'
         ],
         months: [
             'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'
