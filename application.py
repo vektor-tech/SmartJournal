@@ -209,7 +209,15 @@ def entry_api():
         # filter with time
         entries = user.entries.filter(Entry.time >= t_from, Entry.time <= t_to).all()
 
-        return jsonify({"success": True, "entries": get_dict_array(user.entries)})
+        # result builder
+        result = []
+        for e in entries:
+            ent = get_dict(e)
+            ent['tag_name'] = e.tag.name
+            ent['hour'] = e.time.hour
+            res.append(ent)
+
+        return jsonify({"success": True, "entries": result})
 
 
 @app.route("/api/tag", methods=["GET", "POST"])
