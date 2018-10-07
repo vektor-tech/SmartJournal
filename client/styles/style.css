@@ -1,0 +1,177 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+
+html {
+    font-family: 'Poppins', sans-serif;
+    padding: 30px;
+}
+
+#app {
+    margin-left: 350px;
+    margin-right: 350px;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title i {
+    padding: 10px;
+}
+
+.title i:hover {
+    transform: scale(1.1);
+    color: rgb(95, 95, 95);
+}
+
+.header-text {
+    flex: 0.9;
+    text-align: center;
+}
+
+.overview-text {
+    flex: 1;
+    margin-top: 50px;
+    margin-left: 50px;
+}
+
+.dateSelection {
+    width: 310px;
+    height: 30px;
+    margin-left: 50px;
+    margin-top: 10px;
+    /* border: solid 1px black; */
+}
+
+.dropDown {
+    width: 100px;
+    padding-left: 5px;
+    border: solid 1px black;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}
+
+/* FOR TIMELINE */
+.container {
+    margin-left: 27px;
+    width: 90%;
+}
+
+.search-box {
+    padding: 5px;
+    margin: 10px 0;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.timeline {
+    position: relative;
+    margin-left: 50px;
+    border-left: 1px solid black;
+}
+
+.hour {
+    margin-left: -50px;
+    margin-top: -5px;
+}
+
+.date {
+    display: inline-block;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 5px;
+    position: relative;
+    left: 15px;
+    margin: 15px 0;
+}
+
+&:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -16px;
+    border: 1px solid black;
+    width: 14px;
+}
+
+.article {
+    position: relative;
+    left: 20px;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+&:hover {
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.4);
+}
+
+.article a {
+    color: steelblue;
+    text-decoration: none;
+}
+
+.article-date {
+    font-weight: 300;
+    font-size: 14px;
+}
+
+.dot {
+    display: block;
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: steelblue;
+    left: -25.5px;
+    top: calc(50% - 5px);
+}
+
+/* FOR PIECHART */
+
+.vue-chart-pie {
+    width: 100%;
+    transform-origin: center;
+    transform: rotate(-90deg);
+
+    path {
+        stroke: white;
+        stroke-width: 0;
+        transform: rotate(-1turn);
+        transition: 1s;
+        opacity: 1;
+    }
+
+    path:nth-of-type(1) {
+        fill: tomato;
+        transition-delay: 300ms;
+    }
+
+    path:nth-of-type(2) {
+        fill: olive;
+        transition-delay: 200ms;
+    }
+
+    path:nth-of-type(3) {
+        fill: skyblue;
+        transition-delay: 100ms;
+    }
+
+    path:nth-of-type(4) {
+        fill: gold;
+        transition-delay: 0ms;
+    }
+
+    &:hover path {
+        transform: none;
+        opacity: 1;
+    }
+}

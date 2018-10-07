@@ -1,0 +1,73 @@
+<html>
+
+<head>
+    <title>
+        HackUTA18
+    </title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+        crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js"></script>
+
+
+</head>
+
+<body>
+    <div id="app">
+
+        <div class="title">
+            <h1 class="header-text">Journal</h1>
+            <a v-on:click="display='profile'"><i class="far fa-user fa-2x"></i></a>
+            <a v-on:click="display='chart'"><i class="fas fa-chart-pie fa-2x"></i></a>{{count}}
+        </div>
+        <div v-if="display=='profile'" class="profile">
+            <h3 class="overview-text">Overview</h3>
+            <div class="dateSelection">
+                <select class="dropDown" v-model="selectedYear">
+                    <option v-for="year in years" :value="year">{{year}}</option>
+                </select>
+                <select class="dropDown" v-model="selectedMonth">
+                    <option v-for="month in months" :value="month">{{month}}</option>
+                </select>
+                <select class="dropDown" v-model="selectedDay">
+                    <option v-for="day in days" :value="day">{{day}}</option>
+                </select>
+            </div>
+            <blog-articles :dates-articles='datesArticles'></blog-articles>
+            <div class="footer">
+                <a>Journal - HackUTA18</a>
+            </div>
+        </div>
+
+        <div v-if="display=='chart'" class="chart">
+            <vue-chart-pie :value="pie"></vue-chart-pie>
+        </div>
+
+    </div>
+
+    <template id='my-template'>
+        <div class='container'>
+            <input v-model='searchQuery' class='search-box' placeholder='Search..'>
+            <div class='timeline' v-if='anyArticle()'>
+                <div v-for='(dateWithArticles, date) in searchedArticles'>
+                    <!-- <p v-if='dateWithArticles.length > 0' class='date'>{{ date }}</p> -->
+                    <div v-for='article in dateWithArticles' class='article'>
+                        <div class='dot'>
+                            <div class="hour">{{article.hour}}</div>
+                        </div>
+                        <p class='article-date'>{{ article.text }}</p>
+                        <h3><a :href="'#' + article.slug">{{ article.tag }}</a></h3>
+                    </div>
+                </div>
+            </div>
+            <p v-else>Not found.</p>
+        </div>
+    </template>
+</body>
+<script src="index.js">
+</script>
+<link rel="stylesheet" href="styles/style.css">
+
+</html>
