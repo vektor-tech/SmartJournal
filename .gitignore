@@ -2,4 +2,10 @@ __pycache__
 
 venv
 
+<<<<<<< HEAD
 .vscode
+=======
+.vscode
+
+flask_session/
+>>>>>>> 2eccd22ff5dc42e92b0df1b65d0ef00f387bdf80

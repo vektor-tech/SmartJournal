@@ -1,5 +1,9 @@
 Click==7.0
 Flask==1.0.2
+<<<<<<< HEAD
+=======
+Flask-Session==0.3.1
+>>>>>>> 2eccd22ff5dc42e92b0df1b65d0ef00f387bdf80
 Flask-SQLAlchemy==2.3.2
 itsdangerous==0.24
 Jinja2==2.10
