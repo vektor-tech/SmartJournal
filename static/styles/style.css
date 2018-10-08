@@ -21,14 +21,19 @@ html {
     color: black;
 }
 
+.title i:active {
+    color: #00aaff;
+}
+
 .title i:hover {
     transform: scale(1.1);
-    color: rgb(95, 95, 95);
+    color: #00aaff;
 }
 
 .header-text {
     flex: 0.9;
     text-align: center;
+    color: #00aaff;
 }
 
 .overview-text {
@@ -120,7 +125,7 @@ html {
 }
 
 .article a {
-    color: steelblue;
+    color: #00aaff;
     text-decoration: none;
 }
 
@@ -135,7 +140,7 @@ html {
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background: steelblue;
+    background: #00aaff;
     left: -25.5px;
     top: calc(50% - 5px);
 }
