@@ -5,8 +5,8 @@
         Smart Journal - Make Smart Decision
     </title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
-        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+        integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js"></script>
@@ -20,7 +20,7 @@
 
         <!-- TITLE -->
         <div class="title">
-            <h1 class="header-text">Smart Journal</h1>
+            <h1 class="header-text"> - Smart Journal - </h1>
             <a v-on:click="display='activity'"><i class="fas fa-plus fa-2x"></i></a>
             <a v-on:click="display='profile'"><i class="far fa-user fa-2x"></i></a>
             <a v-on:click="display='chart';createChartData"><i class="fas fa-chart-pie fa-2x"></i></a>
@@ -73,7 +73,7 @@
                 <option v-for="tag in allTags" :value="tag">{{tag.name}}</option>
                 <input v-model='selectedActivity' class='activity-box' placeholder='Add Activity detail..'>
                 <br>
-                Productivity Level:<select class="dropDown" v-model="selectedLevel">
+                Productivity level:<select class="dropDown" v-model="selectedLevel">
                     <option v-for="l in level" :value="l">{{l}}</option>
                 </select><br>
                 <button class="button" v-on:click="activityAdd">Add</button>
@@ -92,7 +92,8 @@
                         </div>
                         <p class='article-date'>{{ article.text }}</p>
                         <h3><a>{{ article.tag_name }}</a></h3>
-                        <a v-on:click="deleteEntry(article.id)" class="delete"><i class="far fa-trash-alt fa-2x"></i></a>
+                        <a v-on:click="deleteEntry(article.id)" class="delete"><i
+                                class="far fa-trash-alt fa-2x"></i></a>
                     </div>
                 </div>
             </div>
